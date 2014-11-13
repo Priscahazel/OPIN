@@ -9,7 +9,6 @@ class NewsController < ApplicationController
   end
 
   def create 
-    redirect_to(:action => 'index')
   end
 
   def edit
@@ -17,14 +16,12 @@ class NewsController < ApplicationController
   
 
   def update
-    redirect_to(:action => 'show', :id => @patient.id)
   end
 
   def delete
   end
 
-  def destroy
-    redirect_to(:action => 'index')  
+  def destroy 
   end
   
 
