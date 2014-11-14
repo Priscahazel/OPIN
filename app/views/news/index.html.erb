@@ -1,6 +1,6 @@
 <h1> News Stories </h1> 
 <% @rss.each do |rss| %>
-<h3> <%= rss.title %> </h3>
+<h3> <%= link_to rss.title, rss.link %> </h3>
 <p> <%= rss.description.split('.')[0] %></p>
 <%= image_tag rss.media_content_url%>
 <% end %> 
