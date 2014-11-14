@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+gem 'simple-rss'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
@@ -39,4 +39,4 @@ gem 'pry-byebug',     group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
+gem 'mechanize', '~> 2.7.3'
