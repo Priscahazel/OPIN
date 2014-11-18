@@ -13,3 +13,16 @@
  *= require_tree .
  *= require_self
  */
+ #tab {
+  font-size: 20px;
+}
+.fly{
+  margin-top: 100px;
+}
+.smile{
+  margin-top:100px;
+}
+
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus{
+  
+}

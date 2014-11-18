@@ -2,39 +2,60 @@ require 'open-uri'
 
 class NewsController < ApplicationController
   def index
-    rss = SimpleRSS.parse open("http://rss.cnn.com/rss/edition_africa.rss")
+    @index
+  end
+
+  
+
+  def rss
+    rss = SimpleRSS.parse open(params[:q])
     @rss = rss.items
   end
 
-  def new
-  end
+#   def zeera
+#    zeera = SimpleRSS.parse open("http://www.aljazeera.com/Services/Rss/?PostingId=2007731105943979989")
+#    @zeera = zeera.items 
+#  end
 
-  def show
-    agent = Mechanize.new
-    agent.get("http://www.bbc.com/news/business-29896411")
-    
-    @bbc = agent.page.search(".story-body").map(&:text) 
-  end
+#  def cnn
+#   cnn = SimpleRSS.parse open("http://rss.cnn.com/rss/edition.rss")
+#   @cnn = cnn.items
+# end
 
-  def create 
-  end
+# def joy
+#   joy = SimpleRSS.parse open("http://www.myjoyonline.com/services/rss/")
+#   @joy = joy.items 
+# end
 
-  def edit
-  end
-  
 
-  def update
-  end
+def show
+  agent = Mechanize.new
+  agent.get(params[:q])
 
-  def delete
-  end
+  render html: "#{agent.page.at("p")}#{agent.page.search(".cnn_storypgraphtxt")}".html_safe
+end
 
-  def destroy 
-  end
-  
 
-  private
-  def news_params
 
-  end
+def create 
+end
+
+def edit
+end
+
+
+def update
+end
+
+def delete
+end
+
+def destroy 
+end
+
+
+private
+def news_params
+
+end
 end
