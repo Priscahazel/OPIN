@@ -24,5 +24,13 @@
 }
 
 .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus{
-  
+
+}
+#nav{
+  background-color:#428bca ;
+}
+.opin{
+  font-family: 'Comfortaa', cursive;
+  color: white;
+  font-size: 20px;
 }

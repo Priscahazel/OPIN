@@ -8,31 +8,51 @@ class NewsController < ApplicationController
   
 
   def rss
+    @category = params[:category]
     rss = SimpleRSS.parse open(params[:q])
     @rss = rss.items
   end
 
-#   def zeera
-#    zeera = SimpleRSS.parse open("http://www.aljazeera.com/Services/Rss/?PostingId=2007731105943979989")
-#    @zeera = zeera.items 
-#  end
-
-#  def cnn
-#   cnn = SimpleRSS.parse open("http://rss.cnn.com/rss/edition.rss")
-#   @cnn = cnn.items
-# end
-
-# def joy
-#   joy = SimpleRSS.parse open("http://www.myjoyonline.com/services/rss/")
-#   @joy = joy.items 
-# end
+  def show
+    agent = Mechanize.new
+    agent.get(params[:q])
 
 
-def show
-  agent = Mechanize.new
-  agent.get(params[:q])
+    if params[:category] == "cnn"
+  #CNN
+  @article_title = "#{agent.page.at("h1")}".html_safe
+  #@article_video = "#{agent.page.at("#cvp_1")}"
+  @article_content ="#{agent.page.at("p")}#{agent.page.search(".cnn_storypgraphtxt")}".html_safe
 
-  render html: "#{agent.page.at("p")}#{agent.page.search(".cnn_storypgraphtxt")}".html_safe
+elsif params[:category] == "bbc"
+  #BBC
+
+  @article_title = "#{agent.page.at("h1")}".html_safe
+ # @article_video = "#{agent.page.at("#cvp_1")}"
+ @article_content = "#{agent.page.search("p")}".html_safe
+
+elsif params[:category] == "aljazeera"
+  #Aljazeera
+  @article_title = "#{agent.page.at("h1")}".html_safe
+  #@article_video = "#{agent.page.at("#cvp_1")}"
+  @article_content = "#{agent.page.at(".DetailedSummary")}".html_safe
+  
+elsif params[:category] == "joy_news"
+  #Joy news
+  @article_title = "#{agent.page.at("h1")}".html_safe
+  #@article_video = "#{agent.page.at("#cvp_1")}"
+  @article_content = "#{agent.page.search(".storypane")}".html_safe
+
+
+elsif params[:category] == "peace_news"
+  #Peace news
+  @article_title = "#{agent.page.at(".peace_black_text_2")}".html_safe
+  #@article_video = "#{agent.page.at("#cvp_1")}"
+  @article_content = "#{agent.page.at(".peace_content_text_1")}".html_safe
+
+end
+
+  #render html: "#{agent.page.at("p")}#{agent.page.search(".cnn_storypgraphtxt")}".html_safe, template: "layout/application"
 end
 
 
